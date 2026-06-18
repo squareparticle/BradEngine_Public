@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BradEngine Arcade</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050511;
+      --panel: #111226;
+      --panel-2: #191b35;
+      --line: #34375f;
+      --text: #f7f8ff;
+      --muted: #b7bcdf;
+      --cyan: #1ff7ff;
+      --pink: #ff3df2;
+      --yellow: #ffe66d;
+      --green: #46ff92;
+      --orange: #ff9b3d;
+      --shadow-cyan: rgba(31, 247, 255, 0.28);
+      --shadow-pink: rgba(255, 61, 242, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(255, 61, 242, 0.18), transparent 26rem),
+        radial-gradient(circle at 84% 4%, rgba(31, 247, 255, 0.16), transparent 24rem),
+        linear-gradient(180deg, #070718 0%, #070718 38%, #050511 100%);
+    }
+
+    body {
+      min-height: 100%;
+      margin: 0;
+      color: var(--text);
+      font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .hero {
+      min-height: min(560px, calc(100vh - 24px));
+      display: grid;
+      align-items: center;
+      padding: 46px 0 34px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: min(840px, 86vw);
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--pink), transparent);
+      box-shadow: 0 0 26px var(--shadow-cyan), 0 0 34px var(--shadow-pink);
+    }
+
+    .marquee {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(31, 247, 255, 0.5);
+      color: var(--cyan);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      background: rgba(7, 9, 29, 0.78);
+      box-shadow: 0 0 22px var(--shadow-cyan);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3.1rem, 9vw, 7.4rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 10px rgba(31, 247, 255, 0.65),
+        0 0 26px rgba(255, 61, 242, 0.42),
+        7px 7px 0 rgba(0, 0, 0, 0.55);
+    }
+
+    .subtitle {
+      max-width: 800px;
+      margin: 22px 0 28px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 2vw, 1.35rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .start-button,
+    .ghost-button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .start-button {
+      color: #051016;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      box-shadow: 0 0 20px rgba(255, 230, 109, 0.35);
+    }
+
+    .ghost-button {
+      border: 1px solid rgba(255, 61, 242, 0.65);
+      color: var(--pink);
+      background: rgba(14, 14, 32, 0.72);
+      box-shadow: inset 0 0 18px rgba(255, 61, 242, 0.09);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 36px 0 18px;
+    }
+
+    .stat {
+      min-height: 92px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(17, 18, 38, 0.76);
+      box-shadow: inset 0 0 22px rgba(31, 247, 255, 0.04);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--yellow);
+      font-size: 1.65rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .category {
+      margin-top: 42px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--cyan);
+      font-size: clamp(1.45rem, 4vw, 2.25rem);
+      text-transform: uppercase;
+      text-shadow: 0 0 16px var(--shadow-cyan);
+    }
+
+    .category-header p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .demo-card {
+      min-height: 184px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+      border: 1px solid rgba(52, 55, 95, 0.95);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      background:
+        linear-gradient(135deg, rgba(31, 247, 255, 0.08), transparent 44%),
+        linear-gradient(180deg, rgba(25, 27, 53, 0.94), rgba(12, 13, 30, 0.96));
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.24);
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .demo-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      transform: translateX(-120%);
+      transition: transform 260ms ease;
+    }
+
+    .demo-card:hover,
+    .demo-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(31, 247, 255, 0.86);
+      box-shadow: 0 0 0 1px rgba(31, 247, 255, 0.16), 0 16px 42px rgba(0, 0, 0, 0.36);
+      outline: none;
+    }
+
+    .demo-card:hover::before,
+    .demo-card:focus-visible::before {
+      transform: translateX(120%);
+    }
+
+    .demo-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.12rem;
+      line-height: 1.2;
+    }
+
+    .demo-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .demo-card .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      color: var(--green);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(70, 255, 146, 0.06);
+    }
+
+    .footer {
+      margin-top: 54px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    @media (max-width: 920px) {
+      .stats,
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 22px, 1180px);
+        padding-top: 18px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 34px 0 28px;
+      }
+
+      .stats,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .category-header {
+        display: block;
+      }
+
+      .category-header p {
+        margin-top: 8px;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero" id="top">
+      <div>
+        <div class="marquee">Insert Coin - BradEngine Demo Cabinet</div>
+        <h1>BradEngine Arcade</h1>
+        <p class="subtitle">
+          A neon-lit launcher for the homemade canvas engine experiments: 3D worlds,
+          physics toys, drawing systems, network tests, and machine-learning demos.
+        </p>
+        <div class="hero-actions">
+          <a class="start-button" href="#three-d">Start demos</a>
+          <a class="ghost-button" href="docs/index.html">Open docs</a>
+          <a class="ghost-button" href="README.md">Read README</a>
+        </div>
+        <div class="stats" aria-label="Demo stats">
+          <div class="stat"><strong>38</strong><span>Playable pages</span></div>
+          <div class="stat"><strong>6</strong><span>Demo categories</span></div>
+          <div class="stat"><strong>3D</strong><span>Custom pipeline</span></div>
+          <div class="stat"><strong>JS</strong><span>Canvas engine</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="category" id="three-d">
+      <div class="category-header">
+        <h2>3D Cabinet</h2>
+        <p>Terrain, mesh, camera, raycasting, and physics experiments built around the 3D side of the engine.</p>
+      </div>
+      <div class="grid">
+        <a class="demo-card" href="examples/3d/3dGraphicsEngine/voxelEngine.html">
+          <h3>Voxel Engine</h3>
+          <p>A blocky generated world with chunks, simple mobs, a player model, and multiple cameras.</p>
+          <div class="meta"><span class="tag">3D</span><span class="tag">Voxel</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/3dGraphicsEngine/water.html">
+          <h3>Water Terrain</h3>
+          <p>A heightmap terrain scene paired with a moving procedural water surface.</p>
+          <div class="meta"><span class="tag">3D</span><span class="tag">Terrain</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/3dGraphicsEngine/physics.html">
+          <h3>3D Physics</h3>
+          <p>A 3D physics playground for testing models, collision ideas, and scene movement.</p>
+          <div class="meta"><span class="tag">3D</span><span class="tag">Physics</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/3dGraphicsEngine/collision.html">
+          <h3>Terrain Collision</h3>
+          <p>Polygon collision detection across a generated terrain surface.</p>
+          <div class="meta"><span class="tag">3D</span><span class="tag">Collision</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/asteroids3D/index.html">
+          <h3>Asteroids 3D</h3>
+          <p>A larger arcade-style space experiment with meshes, HUD art, and ship controls.</p>
+          <div class="meta"><span class="tag">Game</span><span class="tag">Space</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/solarsystem/index.html">
+          <h3>Solar System</h3>
+          <p>A camera-driven 3D orbital demo with planets, space motion, and layered rendering.</p>
+          <div class="meta"><span class="tag">3D</span><span class="tag">Orbit</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/starfield/index.html">
+          <h3>Starfield</h3>
+          <p>A compact depth and motion test that turns simple points into a space-flight scene.</p>
+          <div class="meta"><span class="tag">3D</span><span class="tag">Motion</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/collisionPhysics/index.html">
+          <h3>Collision Physics</h3>
+          <p>A model and collision sandbox using the engine's 3D experiments and mesh assets.</p>
+          <div class="meta"><span class="tag">3D</span><span class="tag">Mesh</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/raycasting/raycast.html">
+          <h3>Raycasting</h3>
+          <p>An early-3D rendering experiment using ray projection and wall intersections.</p>
+          <div class="meta"><span class="tag">Render</span><span class="tag">Raycast</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/raycasting/texturedRaycasting.html">
+          <h3>Textured Raycasting</h3>
+          <p>The raycasting idea with texture sampling added for a more classic corridor look.</p>
+          <div class="meta"><span class="tag">Render</span><span class="tag">Texture</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="category" id="cloth">
+      <div class="category-header">
+        <h2>Cloth Lab</h2>
+        <p>Small variations of the cloth and mesh experiments, each focused on a different render mode.</p>
+      </div>
+      <div class="grid">
+        <a class="demo-card" href="examples/3d/cloth/flag.html">
+          <h3>Flag Cloth</h3>
+          <p>A cloth simulation shaped into a waving flag-like mesh.</p>
+          <div class="meta"><span class="tag">Cloth</span><span class="tag">Physics</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/cloth/mesh.html">
+          <h3>Cloth Mesh</h3>
+          <p>A raw mesh view of the cloth system and its connected particles.</p>
+          <div class="meta"><span class="tag">Cloth</span><span class="tag">Mesh</span></div>
+        </a>
+        <a class="demo-card" href="examples/3d/cloth/colored.html">
+          <h3>Colored Cloth</h3>
+          <p>A shaded/color variation of the cloth render experiment.</p>
+          <div class="meta"><span class="tag">Cloth</span><span class="tag">Color</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="category" id="drawing">
+      <div class="category-header">
+        <h2>Drawing Floor</h2>
+        <p>Cellular automata, procedural images, orbit demos, and handmade 2D physics sketches.</p>
+      </div>
+      <div class="grid">
+        <a class="demo-card" href="examples/drawing/cellularAutomaton/sandsim.html">
+          <h3>Sand Sim</h3>
+          <p>A falling-sand cellular automaton with simple grid-based material behavior.</p>
+          <div class="meta"><span class="tag">Drawing</span><span class="tag">Cells</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/cellularAutomaton/gameoflife.html">
+          <h3>Game of Life</h3>
+          <p>A classic Conway-style cellular automaton implemented in the engine.</p>
+          <div class="meta"><span class="tag">Cells</span><span class="tag">Rules</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/cellularAutomaton/gameoflifefinger.html">
+          <h3>Game of Life Finger</h3>
+          <p>A touch/mouse-friendly variation for painting Game of Life cells.</p>
+          <div class="meta"><span class="tag">Cells</span><span class="tag">Input</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/cellularAutomaton/1D.html">
+          <h3>1D Automaton</h3>
+          <p>A one-dimensional cellular automaton exploring rule-based line generation.</p>
+          <div class="meta"><span class="tag">Cells</span><span class="tag">1D</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/cellularAutomaton/firesmile.html">
+          <h3>Fire Smile</h3>
+          <p>A playful fire simulation variation using cellular state changes.</p>
+          <div class="meta"><span class="tag">Fire</span><span class="tag">Cells</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/cellularAutomaton/firefinger.html">
+          <h3>Fire Finger</h3>
+          <p>An interactive fire demo that responds to pointer-style input.</p>
+          <div class="meta"><span class="tag">Fire</span><span class="tag">Input</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/orbits/orbit2D.html">
+          <h3>2D Orbits</h3>
+          <p>A two-dimensional orbital motion and drawing experiment.</p>
+          <div class="meta"><span class="tag">Orbit</span><span class="tag">2D</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/orbits/orbit3D.html">
+          <h3>3D Orbits</h3>
+          <p>An orbit demo extended into 3D-style projection and camera movement.</p>
+          <div class="meta"><span class="tag">Orbit</span><span class="tag">3D</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/procedural/planet.html">
+          <h3>Procedural Planet</h3>
+          <p>A procedural image/planet generator using noise, height values, and color bands.</p>
+          <div class="meta"><span class="tag">Procedural</span><span class="tag">Noise</span></div>
+        </a>
+        <a class="demo-card" href="examples/drawing/customPhysics/index.html">
+          <h3>Custom Physics</h3>
+          <p>A hub for spring, rope, and particle physics sketches.</p>
+          <div class="meta"><span class="tag">Physics</span><span class="tag">2D</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="category" id="games">
+      <div class="category-header">
+        <h2>Action Bay</h2>
+        <p>Game-like examples and event-driven tests with bullets, bosses, lasers, and scripted behaviors.</p>
+      </div>
+      <div class="grid">
+        <a class="demo-card" href="examples/eventDriven/spaceBoss/index.html">
+          <h3>Space Boss</h3>
+          <p>An event-driven boss battle with animated parts, projectiles, and scripted attacks.</p>
+          <div class="meta"><span class="tag">Game</span><span class="tag">Boss</span></div>
+        </a>
+        <a class="demo-card" href="examples/eventDriven/spaceBoss/laserTest.html">
+          <h3>Laser Test</h3>
+          <p>A focused test scene for laser behavior and projectile interactions.</p>
+          <div class="meta"><span class="tag">Game</span><span class="tag">Laser</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="category" id="physics">
+      <div class="category-header">
+        <h2>Physics Corner</h2>
+        <p>Standalone 2D physics pages for testing motion, collision, and engine integration.</p>
+      </div>
+      <div class="grid">
+        <a class="demo-card" href="examples/physics/physics.html">
+          <h3>Physics Demo</h3>
+          <p>A basic physics testbed for moving objects and collisions.</p>
+          <div class="meta"><span class="tag">Physics</span><span class="tag">2D</span></div>
+        </a>
+        <a class="demo-card" href="examples/physics/physics2.html">
+          <h3>Physics Demo 2</h3>
+          <p>A second physics setup for trying different bodies, controls, and scene behavior.</p>
+          <div class="meta"><span class="tag">Physics</span><span class="tag">2D</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="category" id="machine-learning">
+      <div class="category-header">
+        <h2>Machine Room</h2>
+        <p>Neural-network, evolution, probability, and training sketches from the learning side of the engine.</p>
+      </div>
+      <div class="grid">
+        <a class="demo-card" href="examples/machineLearning/ann/index.html">
+          <h3>ANN Playground</h3>
+          <p>A neural-network demo page for experimenting with simple learning logic.</p>
+          <div class="meta"><span class="tag">ML</span><span class="tag">ANN</span></div>
+        </a>
+        <a class="demo-card" href="examples/machineLearning/ann/pong.html">
+          <h3>ANN Pong</h3>
+          <p>A Pong-style experiment with neural-network-inspired behavior.</p>
+          <div class="meta"><span class="tag">ML</span><span class="tag">Pong</span></div>
+        </a>
+        <a class="demo-card" href="examples/machineLearning/neurons/graph/index.html">
+          <h3>Neuron Graph</h3>
+          <p>A graphing and line-training view for visualizing simple neuron behavior.</p>
+          <div class="meta"><span class="tag">ML</span><span class="tag">Graph</span></div>
+        </a>
+        <a class="demo-card" href="examples/machineLearning/neurons/jumpper/index.html">
+          <h3>Jumpper</h3>
+          <p>A small jumping-agent experiment for training/control ideas.</p>
+          <div class="meta"><span class="tag">ML</span><span class="tag">Agent</span></div>
+        </a>
+        <a class="demo-card" href="examples/machineLearning/evolution/chooseFittest/index.html">
+          <h3>Choose Fittest</h3>
+          <p>A probability and selection demo around choosing stronger candidates over time.</p>
+          <div class="meta"><span class="tag">Evolution</span><span class="tag">Selection</span></div>
+        </a>
+        <a class="demo-card" href="examples/machineLearning/evolution/monkeytyping/index.html">
+          <h3>Monkey Typing</h3>
+          <p>An evolutionary text-matching experiment inspired by random mutation and selection.</p>
+          <div class="meta"><span class="tag">Evolution</span><span class="tag">Text</span></div>
+        </a>
+        <a class="demo-card" href="examples/machineLearning/evolution/rockets/index.html">
+          <h3>Evolution Rockets</h3>
+          <p>A rocket evolution sandbox with repeated attempts and improving movement paths.</p>
+          <div class="meta"><span class="tag">Evolution</span><span class="tag">Rockets</span></div>
+        </a>
+        <a class="demo-card" href="examples/machineLearning/evolution/rockets/rockets.html">
+          <h3>Rockets Alternate</h3>
+          <p>A second entry point for the rockets evolution experiment.</p>
+          <div class="meta"><span class="tag">Evolution</span><span class="tag">Rockets</span></div>
+        </a>
+        <a class="demo-card" href="examples/machineLearning/evolution/salesman/index.html">
+          <h3>Salesman</h3>
+          <p>A route-optimization experiment based on the traveling-salesman problem.</p>
+          <div class="meta"><span class="tag">Evolution</span><span class="tag">Routes</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="category" id="network">
+      <div class="category-header">
+        <h2>Network Link</h2>
+        <p>Host/join pages for the drag-and-drop multiplayer networking experiment.</p>
+      </div>
+      <div class="grid">
+        <a class="demo-card" href="examples/network/dragdrop/host.html">
+          <h3>Dragdrop Host</h3>
+          <p>The host-side page for the network drag/drop test.</p>
+          <div class="meta"><span class="tag">Network</span><span class="tag">Host</span></div>
+        </a>
+        <a class="demo-card" href="examples/network/dragdrop/join.html">
+          <h3>Dragdrop Join</h3>
+          <p>The joining client page for the network drag/drop test.</p>
+          <div class="meta"><span class="tag">Network</span><span class="tag">Client</span></div>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      BradEngine is a historical teaching codebase. Some demos are experiments, some are games,
+      and some are charmingly weird lab benches. Use the local server for the smoothest run.
+    </footer>
+  </main>
+</body>
+</html>
