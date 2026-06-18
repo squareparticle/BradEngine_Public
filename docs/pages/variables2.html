@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BRADEngine.js - Variables</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BRADEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">Variables Part 2:
+        </h1>
+        <h4 style="font-weight:normal;">Variables are a way for your program to remember.  You can think of them as place holders.
+          <br/>
+          <br/>
+
+        <!-- Blog Post -->
+        <div id="references"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">References</h2>
+            <p class="card-text"> Objects are stored in memory (RAM).  Each object is stored in a separate part of memory </p>
+
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  var arr1 = ['a'];
+  var arr2 = ['a'];
+  console.log(arr1 === arr2); // -> false            
+            </code></pre>
+            <p class="card-text"> Passing the objects into functions doesn't create a new object.  It just uses the current one. This is called passing by <strong>reference.</strong> </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  function copyPlayer(player, name) {
+      player.name = name;
+      return player;
+  }
+  let player1 = {
+      name: 'Mario',
+      hitPoints: 30
+  };
+  let player2 = copyPlayer(player, 'Luigi');
+  console.log(player1); // -> { name: 'Luigi', hitPoints: 30 }
+  console.log(player2); // -> { name: 'Luigi', hitPoints: 30 }
+            </code></pre>
+
+        <p class="card-text"> Most of the time this is what you want.  But if you don't want to pass by reference, you need to clone the object yourself.  </p>
+        <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  function copyPlayer(player, name) {
+    let newPlayer = {}; // create a new object
+    newPlayer.name = name;
+    return newPlayer;
+  }
+  let player1 = {
+    name: 'Mario',
+    hitPoints: 30
+  };
+  let player2 = copyPlayer(player, 'Luigi');
+  console.log(player1); // -> { name: 'Mario', hitPoints: 30 }
+  console.log(player2); // -> { name: 'Luigi', hitPoints: 10 }
+        </code></pre>
+
+        <p class="card-text"> If objects are too big to clone by hand then convert them to a JSON String and back to an Object and now you have a new Ojbect with all the properties of the original  </p>
+        <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  function copyPlayer(player, name) {
+    let newPlayer = JSON.parse(JSON.stringify(player));
+    newPlayer.name = name;
+    return newPlayer;
+  }
+  let player1 = {
+    name: 'Mario',
+    hitPoints: 30
+  };
+  let player2 = copyPlayer(player, 'Luigi', 10);
+  console.log(player1); // -> { name: 'Mario', hp: 30 }
+  console.log(player2); // -> { name: 'Luigi', hp: 10 }
+        </code></pre>
+
+      </div>
+    </div>
+
+
+
+        <!-- Blog Post -->
+        <div id="varFunc"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Variable functions</h2>
+            <p class="card-text"> Functions can be stored in variables.  This is a very useful tool and a big chunk of how functional programming works. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+function add(a,b){
+  return a+b;
+}
+let addMe = add;
+console.log(addMe(3,4)) // 7
+            </code></pre>
+          </div>
+        </div>          
+
+        <!-- Blog Post -->
+        <div id="loopArrays"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Looping through Arrays</h2>
+              <p class="card-text"> Iterating (looping) through an array of numbers using a for loop </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  array = [ 1, 2, 3, 4, 5, 6 ]; 
+  for (let i = 0; i &lt; array.length; i++) { 
+      console.log(array[i]); 
+  } 
+              </code></pre>
+            </div>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="loopObjects"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Looping through Objects</h2>
+              <p class="card-text"> Iterating (looping) through all the object properties</p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let object = {
+    variable_1:'value 1',
+    variable_2:'value 2',
+    variable_3:'value 3',
+  }
+  for (var property in object) {
+    // to avoid issues you need to check if the property is in the Object
+    if (object.hasOwnProperty(property)) {
+      console.log(property); // value 1, value 2, value 3
+    }
+  }
+              </code></pre>
+            </div>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="loopDict"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Looping through Dictionaries</h2>
+              <p class="card-text"> Objects and dictionaries are the same thing </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  const fruits = {
+    apple: 28,
+    orange: 17,
+    pear: 54,
+  }
+  
+  const keys = Object.keys(fruits);
+  console.log(keys); // [apple, orange, pear] 
+  const values = Object.values(fruits);
+  console.log(values); // [28, 17, 54] 
+  
+  const keys = Object.keys(fruits)
+  for (const key of keys) {
+    console.log(key); // apple, orange, pear
+  }
+
+  // There are 28 apples
+  // There are 17 oranges
+  // There are 54 pears  
+  for (const [fruit, count] of entries) {
+    console.log(`There are ${count} ${fruit}s`);
+  }
+            </code></pre>
+
+            </div>
+          </div>
+
+  </h4>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#references">References</a>
+                  </li>
+                  <li>
+                    <a href="#varFunc">Variable functions</a>
+                  </li>
+                  <li>
+                    <a href="#loopArrays">Looping through Arrays</a>
+                  </li>
+                  <li>
+                    <a href="#loopObjects">Looping through Objects</a>
+                  </li>
+                  <li>
+                    <a href="#loopDict">Looping through Dictionaries</a>
+                  </li>             
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+teaching/
+dirlist.js
+!src/js/dirlist.js
+dist.bat
+newProject.bat
+movies/

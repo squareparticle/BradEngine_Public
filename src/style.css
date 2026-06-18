@@ -1,0 +1,113 @@
+body {
+    overflow: hidden; /* Hide scrollbars */
+    background-color: black;
+    padding: 0; 
+    margin: 0;
+    --dialog-font: "Trebuchet MS", "Segoe UI", Arial, Helvetica, sans-serif;
+  }
+
+  canvas { background-color:white; } 
+  .center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%); /* for IE 9 */
+    -webkit-transform: translate(-50%, -50%); /* for Safari */
+
+    /* optional size in px or %: */
+    width: 1024px;
+    height: 768px;
+  } 
+  .HelpHeader{
+    display: block;
+    margin: 0 0 6px;
+    font-family: var(--dialog-font);
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+  .HelpText{
+    font-family: var(--dialog-font);
+    font-size: 28px;
+  }
+  #overlayHelpDialog {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+
+    background-image: url("sharedMedia/images/dialog.png");               
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  #helpText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: var(--dialog-font);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.32;
+    color: white;
+    width: 850px;
+    height:360px;
+    overflow-y: auto;
+    padding-right: 18px;
+    scrollbar-color: rgba(76, 50, 24, 0.85) rgba(74, 49, 22, 0.22);
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.45);
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+  }
+
+  #helpText::-webkit-scrollbar{
+    width: 12px;
+  }
+
+  #helpText::-webkit-scrollbar-track{
+    margin: 10px 0;
+    border-radius: 999px;
+    background: rgba(74, 49, 22, 0.22);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.16);
+  }
+
+  #helpText::-webkit-scrollbar-thumb{
+    border: 2px solid rgba(221, 170, 82, 0.45);
+    border-radius: 999px;
+    background: linear-gradient(180deg, #6b471e, #3f2b16);
+  }
+
+  #helpText::-webkit-scrollbar-button{
+    display: none;
+  }
+
+  #helpTextMobile{
+    font-family: var(--dialog-font);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: white;
+    scrollbar-color: rgba(76, 50, 24, 0.85) rgba(74, 49, 22, 0.22);
+    scrollbar-width: thin;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.45);
+  }
+
+  .helpKey{
+    display: inline-block;
+    min-width: 165px;
+    color: #e00000;
+    font-family: var(--dialog-font);
+    font-weight: 900;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+  }

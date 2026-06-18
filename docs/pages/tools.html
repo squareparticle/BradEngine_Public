@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BradEngine - Tools</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BradEngine.js Pipeline3D.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">BradEngine.js Pipeline3D.js:
+        </h1>
+        <h4 style="font-weight:normal;"> Quick helpful tools and functions across the BradEngine
+          <br/>
+          <br/>
+          <div id="bradEngine.js"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">BradEngine.js</h2>
+              <p class="card-text"> </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  const clamp(val, min, max)
+  const isObjectEmpty(obj)
+  const isObject(obj)
+  const isFunction(func)
+  const isDefined(obj)
+  const isArray(obj)
+  const getObjectSize(obj)
+  const lerp(x, y, a)
+  const sign(n)
+  const rgbToHex(r, g, b)
+
+  function downloadFile(filename, text)
+              </code></pre>
+            </div>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="tools"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Tools (BradEngine.js)</h2>
+            <p class="card-text"> </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">          
+  static sortObjectArray(list, property)
+  static sortObjectArrayDsc(list, property)
+  static toRadians(degrees)
+  
+  static rotatePointAround(cx, cy, x, y, angle)
+  static getPointOnCircle(radius, degrees)   
+  static getPointOnOval(radiusX, radiusY, degrees)
+
+  static projectTo2D(x,y,z, width, height)        
+  static revertProjectTo2D(x,y,z, width, height)
+
+  static clampMin(number, min)
+  static clampMax(number, max)
+  static clampMinMax(number, min, max)
+
+  static getMilliseconds()
+
+  static intToHex(rgb)        
+  static rgbToHex(rgb)
+
+  static getRandomObject(arr)
+  static getRandomObjectByProbability(arr)
+  static getNumberBetween(min, max)
+  static getDecimalBetween(min, max)
+  static getRandomPointInBox(x,y,width,height)
+
+  static cloneObject(obj)
+  static mergeWithObject(obj, params)   
+  static overideObject(obj, params)
+  
+  static sqr(x)
+  static dist2(v, w)
+  static distToSegmentSquared(p, v, w)
+  static rayCast(pos, dir, segment)
+  static vecToAngle(vec)
+  
+  static distanceBetweenPoints(pointA, pointB)
+  static closestPointOnLineSegment(p, v, w)          
+  static distToLineSegment(p, v, w)         
+    </code></pre>
+  </div>
+</div>
+
+<div id="collision"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+<div class="card mb-4">
+  <div class="card-body">
+    <h2 class="card-title">Collision (BradEngine.js)</h2>
+    <p class="card-text"> </p>
+    <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  static buildBounds(center, size)
+
+  static testBoxOnBox(rect1, rect2)
+  static testPointOnCircle(point, position, radius)
+  static testCircleOnCircle(circlePosition1, radius1, circlePosition2, radius2)   
+  static testPointOnBox(point, bounds)
+  static testCircleOnBox(circle, rect)
+
+  static distToLineSegment(point, lineStartPoint, lineEndPoint)
+  static closestPointOnLineSegment(point, lineStartPoint, lineEndPoint)
+  static testLineIntersect(line1, line2)
+    </code></pre>
+  </div>
+</div>
+
+        <!-- Blog Post -->
+        <div id="pipeline3d"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Pipeline3D.js</h2>
+            <p class="card-text"> </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  static parseDirectXFile(content)
+  static K3DtoModel(k3d)
+
+  static scale(x,y,z, vertices)  
+  static scaleStatic(x,y,z, vertices)
+  static translate(x,y,z, vertices)
+  static translateStatic(x,y,z, vertices)
+  
+  static rotate(x,y,z, vertices)
+  static rotateStatic(x,y,z, vertices)        
+  static rotateStaticRadians(x,y,z, vertices)
+  static rotateVert(obj, rx, ry, rz) 
+  static rotateVertRadians(obj, rx, ry, rz)
+  
+  static getLitColor(faceNormal, faceColor, lights, ambientLight)
+            </code></pre>
+        </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="tools2d"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Tools2D (Pipeline3D.js)</h2>
+            <p class="card-text"> </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  static normalize(v)           
+  static distanceBetweenVerts(v1, v2)
+  static fromAngle(angle, length)
+  static getRandomVector()
+  static mag(v)
+            </code></pre>
+        </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="tools3d"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Tools3D (Pipeline3D.js)</h2>
+            <p class="card-text"> </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  static dotProduct(v1, v2)               
+  static crossProduct(v1, v2)
+  
+  static limit(v,max)
+  static magSq(v)
+  static normalize(v)
+  static setMag(v, length)
+  static normalizePoly(p1, p2, p3)
+
+  static addVector(vector1, amount)
+  static subVector(vector1, amount)
+  static multVector(vector1, amount)
+
+  static addVectors(vector1, vector2)
+  static subVectors(vector1, vector2)
+  static multVectors(vector1, vector2)
+
+  static negativeVector(vector)
+
+  static getRandomPostision(xBounds, yBounds, zBounds) // kept with the original spelling in code
+          </code></pre>
+
+        </div>
+      </div>            
+
+  </h4>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#bradEngine.js">BradEngine.js</a>
+                  </li>                  
+                  <li>
+                    <a href="#tools">Tools (BradEngine.js)</a>
+                  </li>
+                  <li>
+                    <a href="#collision">Collision (BradEngine.js)</a>
+                  </li>
+                  <li>
+                    <a href="#pipeline3d">Pipeline3D.js</a>
+                  </li>
+                  <li>
+                    <a href="#tools2d">Tools2D (Pipeline3D.js)</a>
+                  </li>
+                  <li>
+                    <a href="#tools3d">Tools3D (Pipeline3D.js)</a>
+                  </li>               
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

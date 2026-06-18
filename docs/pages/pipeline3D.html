@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Pipeline3D.js - Fundamentals</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Pipeline3D.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">Pipeline3D.js:
+        </h1>
+        <h4 style="font-weight:normal;">The Pipeline3D Engine will software render 3D objects using pure math.
+          <br/>
+          <br/>
+          <div class="alert alert-info" role="alert">
+            <p><h4>Current repo note:</h4></p>
+            <p>The 3D examples are under <strong>examples/3d</strong>. Load meshes with <strong>findResources()</strong>; <strong>.x</strong> files are parsed with <strong>Pipeline3D.parseDirectXFile()</strong>, and <strong>.obj</strong> files are parsed through K3D and converted with <strong>Pipeline3D.K3DtoModel()</strong>.</p>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="loading"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Loading 3D resources</h2>
+            <p class="card-text"> Resources that can be loaded by the current engine path are DirectX <strong>.x</strong> meshes and Wavefront <strong>.obj</strong> meshes. Some examples also load images and JSON-like data through the normal resource loader. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    loadResources(){ this.findResources('wiremesh','examples/3d/wiremesh/meshes'); }
+
+    setup(){
+        this.loadedMeshes['meshes/tank.x'];
+    }   
+            </code></pre>
+        </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="scene"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Scene Setup</h2>
+            <p class="card-text"> A scene is an collection of 3D objects, lights and cameras used to render to the screen  </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    setup(){
+        this.scene = new Scene();
+        this.scene.camera = {pos:{x:10,y:0,z:25},norm:{x:0,y:0,z:1}, rot:{x:0,y:0,z:0}}
+        this.speed = 40; // camera movement and rotation speed
+        this.scene.ambientlight = {r:50,g:50,b:50}; // background light when there is no light
+    }
+            </code></pre>
+
+        </div>
+      </div>            
+
+        <!-- Blog Post -->
+        <div id="lights"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Lights</h2>
+            <p class="card-text"> Add lights to the scene </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let lightPos = {x:-97,y:30,z:-50};
+    this.scene.lights.push({pos:lightPos,norm:Tools3D.normalize(lightPos),col:{r:255,g:255,b:255}});
+            </code></pre>
+        </div>
+      </div>
+      
+        <!-- Blog Post -->
+        <div id="meshes"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Meshes</h2>
+            <p class="card-text"> Adding a Mesh (3D object) to the scene. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let mesh = new MeshObject(this.loadedMeshes['meshes/spaceship.x']);
+    mesh.color = {r:255, g:0, b:0};
+    mesh.pos={ x:100, y:100, z:500 }
+    this.scene.meshObjects.push(mesh);
+            </code></pre>
+        </div>
+    </div>
+
+        <!-- Blog Post -->
+        <div id="render"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Render the Scene</h2>
+              <p class="card-text"> Rasterize the polygons into pixels </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    update(delta){  
+        this.scene.render(this.canvas);
+    }                
+              </code></pre>
+          </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="camera"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">3D Camera</h2>
+              <p class="card-text"> The defaultCameraKeyboardControls creates a free space camera </p>
+              <div class="alert alert-warning" role="alert">
+                <p><h4>Keyboard commands:</h4></p>
+                "w" MoveCamera.FORWARD<br/>
+                "s" MoveCamera.BACK<br/>           
+                "a" MoveCamera.YAXIS_LEFT<br/>
+                "d" MoveCamera.YAXIS_RIGHT<br/>
+                "ArrowDown" MoveCamera.XAXIS_DOWN<br/>
+                "ArrowUp" MoveCamera.XAXIS_UP      
+                </div>   
+
+              <p class="card-text"> runCameraControls(delta, moveSpeed, rotateSpeed) </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    setup(){
+        this.scene.camera = {pos:{x:10,y:0,z:25},norm:{x:0,y:0,z:1}, rot:{x:0,y:0,z:0}}
+    }
+
+    getKeyboardInput(event){ this.scene.defaultCameraKeyboardControls(event); }
+
+    update(delta){  
+        this.scene.runCameraControls(delta, this.speed, this.speed);
+        this.scene.render(this.canvas);
+    }                
+              </code></pre>
+          </div>
+      </div>      
+
+        <!-- Blog Post -->
+        <div id="rotation"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Rotation</h2>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    addRotation(rot)
+    rotateToPosition(x,y,z)
+            </code></pre>
+            <p class="card-text"> <strong>Example:</strong> </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    this.scene.meshObjects[i].addRotation({x:delta * 60,y:0,z:0});
+            </code></pre>
+          </div>
+      </div>      
+
+  </h4>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#loading">Loading 3D resources</a>
+                  </li>
+                  <li>
+                    <a href="#scene">Scene Setup</a>
+                  </li>
+                  <li>
+                    <a href="#lights">Lights</a>
+                  </li>
+                  <li>
+                    <a href="#meshes">Meshes</a>
+                  </li>
+                  <li>
+                    <a href="#render">Render the Scene</a>
+                  </li>
+                  <li>
+                    <a href="#camera">3D Camera</a>
+                  </li>
+                  <li>
+                    <a href="#rotation">Rotation</a>
+                  </li>               
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

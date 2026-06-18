@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PhysicsEngine.js - Fundamentals</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">PhysicsEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">PhysicsEngine.js:
+        </h1>
+        <h4 style="font-weight:normal;">The Physics Engine will calculate the location and rotation of a given image, sprite or primitive.  This engine was built on top of the Box2D API.
+          <br/>
+          <br/>
+          <div class="alert alert-info" role="alert">
+            <p><h4>Current repo note:</h4></p>
+            <p>The active physics demos are in <strong>examples/physics</strong>. They load shared garage assets from <strong>src/sharedMedia/images/garage</strong> with <strong>findResources()</strong>. The current garage files are <strong>background.jpg</strong>, <strong>crate.png</strong>, <strong>tire.png</strong>, <strong>run.png</strong>, and <strong>run2.png</strong>.</p>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="starting"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Starting the Physics Engine</h2>
+            <p class="card-text"> Use the global BradEngine instance to initialize the physics engine. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    setup(){
+        this.physicsEngine=bradEngine.initPhysics()
+    }
+            </code></pre>
+        </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="loading"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Loading Resources into the Physics Engine</h2>
+            <p class="card-text"> Load the resources normally and pass them into the physics engine if you want the physics engine to draw the scene for you </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  class MainLevel extends LevelInterface {
+    loadResources(){
+        this.findResources('physics',['src/sharedMedia/images/garage'])
+    }
+    setup(){
+        this.physicsEngine=bradEngine.initPhysics()
+        this.physicsEngine.addImages(this.images)
+    } 
+  }
+            </code></pre>
+
+        </div>
+      </div>      
+
+        <!-- Blog Post -->
+        <div id="bodies"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Bodies</h2>
+            <p class="card-text"> In physics bodies are the objects that move and collide with each other.  </p>
+
+            <div class="alert alert-warning" role="alert">
+                <p><h4>To Add a Body</h4></p>
+                <p> addBody({name,image,isVisible},shape,isStatic,x,y,{width,height}) </p>
+            </div>              
+
+            <p><strong>name</strong> used to know things like which body collided with something or which body did you click on etc...</p>
+            <p><strong>isStatic</strong> if true then this body can not move</p>
+            <p><strong>shape</strong> box, circle - the shape that will be used to calculate the physics with</p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    setup(){
+        this.physicsEngine=bradEngine.initPhysics()
+        this.physicsEngine.addImages(this.images)
+        this.physicsEngine.addBody({name:'crate',image:'crate.png'},'box',false,500,400,{width:100,height:50})
+        this.physicsEngine.addBody({name:'tire',image:'tire.png'},'circle',false,400,300,{radius:25})
+        this.physicsEngine.addBody({name:'ground',isVisible:false},'box',true,500,800,{width:1000,height:50})
+    }
+            </code></pre>
+        </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="debug"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Debug Mode</h2>
+            <p class="card-text"> This mode is useful to see what Box2D is calculating for the physics</p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    setup(){
+        this.physicsEngine=bradEngine.initPhysics()
+        this.physicsEngine.addImages(this.images)
+        this.physicsEngine.addBody({name:'crate',image:'crate.png'},'box',false,500,400,{width:100,height:50})
+        this.physicsEngine.addBody({name:'tire',image:'tire.png'},'circle',false,400,300,{radius:25})
+        this.physicsEngine.addBody({name:'ground',isVisible:false},'box',true,500,800,{width:1000,height:50})
+        this.physicsEngine.setupDebug()
+    }
+    update(delta){
+        this.physicsEngine.drawDebug()
+    }
+            </code></pre>
+        </div>
+      </div>    
+      
+        <!-- Blog Post -->
+        <div id="draw"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Draw Mode</h2>
+              <p class="card-text"> Use the Physics Engine to draw the scene for you.</p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+      setup(){
+          this.physicsEngine=bradEngine.initPhysics()
+          this.physicsEngine.addImages(this.images)
+          this.physicsEngine.addBody({name:'crate',image:'crate.png'},'box',false,500,400,{width:100,height:50})
+          this.physicsEngine.addBody({name:'tire',image:'tire.png'},'circle',false,400,300,{radius:25})
+          this.physicsEngine.addBody({name:'ground',isVisible:false},'box',true,500,800,{width:1000,height:50})
+      }
+      update(delta){
+        drawImageFrom00('background.jpg',0,0,this.canvas.width,this.canvas.height)
+        this.physicsEngine.drawImmediateSimulation()
+      }
+              </code></pre>
+
+            <div class="alert alert-warning" role="alert">
+                <p><h4>Note: Drag and Drop</h4></p>
+                <p> To add Drag and drop to draw mode just add the below line to setup() </p>
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    this.physicsEngine.dragNDrop();
+                </code></pre>
+            </div>               
+          </div>
+        </div>        
+
+  </h4>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#starting">Starting the Physics Engine</a>
+                  </li>
+                  <li>
+                    <a href="#loading">Loading Resources into the Physics Engine</a>
+                  </li>
+                  <li>
+                    <a href="#bodies">Bodies</a>
+                  </li>
+                  <li>
+                    <a href="#debug">Debug Mode</a>
+                  </li>
+                  <li>
+                    <a href="#draw">Draw Mode</a>
+                  </li>              
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

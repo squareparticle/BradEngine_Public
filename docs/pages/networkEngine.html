@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Network.js - Fundamentals</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Network.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">Network.js:
+        </h1>
+        <h4 style="font-weight:normal;">The Network Engine will send all the the locations and rotations of all objects on the screen to all the clients. This engine was built on top of the PeerJS API.
+          <br/>
+          <br/>
+          <div class="alert alert-info" role="alert">
+            <p><h4>Current repo note:</h4></p>
+            <p>The network demos are under <strong>examples/network</strong>. Network examples need PeerJS and axios loaded by the page, then call <strong>bradEngine.initNetwork(callback, fps)</strong> and <strong>network.startConnection(isServer, stunServer)</strong>. If <strong>META.NETWORK</strong> exists, <strong>startConnection()</strong> will use those values by default.</p>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="starting"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Starting the Network Engine</h2>
+            <p class="card-text"> <strong>host.html</strong><br/> needs to be setup as the server in the META data. By default the connection uses PeerJS defaults unless you pass a custom PeerJS server in <strong>STUN_SERVER</strong>. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  const META={ NETWORK:{ IS_SERVER:true, STUN_SERVER:{debug:2}},
+               SHOW_DEBUG:true, NETWORK_FPS:60, FPS:60, PHYSICS_FPS:60,
+               CREATE_DIR:false } 
+            </code></pre>
+            <p class="card-text"> <strong>IS_SERVER:</strong> (true/false) - server/client</p>
+            <p class="card-text"> <strong>STUN_SERVER:</strong> server used to make the connection</p>
+            <p class="card-text"> <strong>NETWORK_FPS:</strong> the number of times per second to send the network data to the clients</p>
+            <p class="card-text"> Hosting a private STUN server </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  const META={ NETWORK:{ IS_SERVER:true, STUN_SERVER:{host: '54.235.28.16',port: 9000,path: '/myapp'}}} 
+            </code></pre>    
+            <p class="card-text"><strong>join.html</strong><br/> Hardcode a the html file to be a client that joins the server </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  const META={ NETWORK:{ IS_SERVER:false, ... 
+            </code></pre>                        
+            <p class="card-text"> Use the global BradEngine instance to initialize the network engine. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  this.network = bradEngine.initNetwork((network input callback function),(network frames per second));
+  this.network.startConnection(isServer, stunServer); // arguments are optional when META.NETWORK is defined
+            </code></pre>
+            <p class="card-text"> <strong>Example:</strong> </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  setup(){
+    this.network = bradEngine.initNetwork(this.getNetworkInput,60);
+    this.network.startConnection();
+  }
+            </code></pre>
+        </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="receiving"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Receiving Data</h2>
+            <p class="card-text"> Clients need to update the screen state before showing all the objects to he screen. The server needs to process the clients user input and then send the screen state back to the clients. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  getNetworkInput=(data)=>{
+    // the client is moving the position of a screen object
+    if(this.network.isServer){
+        let input = JSON.parse(data);
+        this.screenState[input.id].x = input.x;
+        this.screenState[input.id].y = input.y;
+    }
+    // the server is updating all the positions/rotations of
+    // all screen objects for this client
+    else
+        this.screenState = JSON.parse(data);
+  }      
+            </code></pre>
+
+        </div>
+      </div>            
+
+        <!-- Blog Post -->
+        <div id="sending"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Sending Data</h2>
+            <p class="card-text"> The server will send all the positions and rotations of all the objects on the screen at 60 fps to all the clients.  The clients will only send the user input (mouse/keyboard) to the server for processing. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  networkUpdate(delta){
+    if(this.network.isServer)
+        // send the screen state to all the clients
+        this.network.sendToAllClients(JSON.stringify(this.screenState));
+    else {
+        // send the mouse/keyboard input to the server if their was any
+        if(this.exportInput) 
+            this.network.sendToServer(JSON.stringify(this.exportInput));
+    }
+  }
+            </code></pre>
+        </div>
+      </div>
+      
+        <!-- Blog Post -->
+        <div id="drag"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Drag and Drop Example</h2>
+            <p class="card-text">  If running on the server then move the object with the mouse.  However, if running on the client then remember where to move the object and send that to the server using <strong>networkUpdate(delta)</strong>. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  getMouseMoveInput(event){
+    if(this.dragCar){
+        if(this.network.isServer){
+            this.dragObject.x = event.position.x;
+            this.dragObject.y = event.position.y;
+        }
+        else{
+            this.exportInput={id:this.dragObject.id, x:event.position.x, y:event.position.y}
+        }
+    }
+  }      
+</code></pre>
+</div>
+</div>
+
+  </h4>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#starting">Starting the Network Engine</a>
+                  </li>
+                  <li>
+                    <a href="#receiving">Receiving Data</a>
+                  </li>
+                  <li>
+                    <a href="#sending">Sending Data</a>
+                  </li>
+                  <li>
+                    <a href="#drag">Drag and Drop Example</a>
+                  </li>                
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

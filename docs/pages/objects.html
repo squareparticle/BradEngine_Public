@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BRADEngine.js - Objects</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BRADEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">Classes:
+        </h1>
+        <h4 style="font-weight:normal;">Classes are Objects that you can extend. This is called Inheritance because the child class has all the properties of it's parents class.<br/><br/> <strong> For example:</strong> Say you wanted an object that can hold any kind of Vehicle.  Then you would create a class called Vehicle and it will hold everything that <strong>ALL</strong> vehicles share, such as, an engine, fuel, topSpeed, etc... Now say you want to create two vehicles with it.  (<strong>A boat and a truck.</strong>)  You can sub class Vehicle to create both a Boat and a Car class. (<i>Since trucks are a type of car, it would be better to create a Car class</i>). Cars have 4 wheels and drives on roads.  A Truck does the same but it can go off roading.  Therefore, you can sub class Car to make a Truck.  
+          <br/><br/>
+          <p><strong>Vehicle class</strong></p>
+          <ul>
+            <li>has an engine</li>
+            <li>takes fuel</li>
+            <li>has a topSpeed</li>
+          </ul>
+          <p><strong>Car class (extends Vehicle) </strong></p>
+          <ul>
+            <li>has an engine</li>
+            <li>takes fuel</li>
+            <li>has a topSpeed</li>
+            <li>has 4 wheels</li>
+            <li>drives on Roads</li>
+          </ul>
+          <p><strong>Truck class (extends Car)</strong></p>
+          <ul>
+            <li>has an engine</li>
+            <li>takes fuel</li>
+            <li>has a topSpeed</li>
+            <li>has 4 wheels</li>
+            <li>drives on Roads</li>
+            <li>can go off roading</li>
+          </ul>
+          <p><strong>Boat class (extends Vehicle)</strong></p>
+          <ul>
+            <li>has an engine</li>
+            <li>takes fuel</li>
+            <li>has a topSpeed</li>
+            <li>works on water</li>
+          </ul>
+        <br/>
+        <!-- Blog Post -->
+        <div id="createClass"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+              <h2 class="card-title">How to create a Class</h2>
+              <p class="card-text">  Use the Class keyword to create a class. </p>
+              <div class="alert alert-warning" role="alert">
+                <p><h4>Note:</h4></p>
+                <p> Unlike objects, you have to tell javascript that you are making a new class by using the keyword <strong>new</strong>.  This is called instantiation. </p>
+              </div>              
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    Class Vehicle{
+    }
+    let vehicle = new Vehicle();
+              </code></pre>
+            </div>
+        </div>   
+
+        <!-- Blog Post -->
+        <div id="passingVars"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>        
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Passing Variables</h2>
+            <p class="card-text">  You need to create a constructor to pass variables to a class </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  Class Vehicle{
+    constructor(engineType){
+
+    }
+  }
+  let vehicle = new Vehicle('8 cylinder engine');
+            </code></pre>
+          </div>
+        </div>   
+
+        <!-- Blog Post -->
+        <div id="this"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>        
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">this (Class variables and functions)</h2>
+            <p class="card-text"> When using variables inside a class you need to use the <strong>this</strong> keyword.  All variables that use <strong>this</strong> can be used anywhere in the class. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  Class Vehicle{
+    constructor(engineType){
+      this.engineType = engineType;
+    }
+  }
+  let vehicle = new Vehicle('8 cylinder engine');
+            </code></pre>
+          </div>
+        </div>
+      
+        <!-- Blog Post -->
+        <div id="func"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Functions (Methods)</h2>
+            <p class="card-text"> Classes hold functions as well as variables. </p>
+            <div class="alert alert-warning" role="alert">
+              <p><h4>Note:</h4></p>
+              <p> Class functions do not need the keyword <strong>function</strong>.  But to access them you do need to us the keyword <strong>this</strong> </p>
+            </div>              
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  Class Vehicle{
+    constructor(engineType){
+      this.engineType = engineType;
+      this.startEngine(); // start the engine when created
+    }
+    startEngine(){
+      // code to start the engine
+    }
+    driveForward(){
+      // code for driving forward
+    }
+  }
+  let vehicle = new Vehicle('8 cylinder engine');
+  vehicle.driveForward();
+            </code></pre>
+          </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="subClass"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Sub Class</h2>
+            <p class="card-text"> Create a child class based on the parents properties </p>
+            <div class="alert alert-warning" role="alert">
+              <p><h4>Note:</h4></p>
+              <p>  <strong>super</strong> in the sub class is used to call the code in it's parents class </p>
+            </div>              
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  Class Vehicle{
+    constructor(engineType, fuel, topSpeed){
+      this.engineType = engineType;
+      this.fuel = fuel;
+      this.topSpeed = topSpeed;
+      this.startEngine(); // start the engine when created
+    }
+    startEngine(){
+      // code to start the engine
+    }
+    driveForward(){
+      // code for driving forward
+    }
+  }
+
+  Class Car extends Vehicle{
+    constructor(engineType, fuel, topSpeed){
+      super(engineType, fuel, topSpeed); // let Vehicle save these variables
+      this.numWheels = 4;
+      this.usesRoads = true;
+    }
+  }
+
+  Class Boat extends Vehicle{
+    
+    // no need for a constructor as Vehicle already has ome
+
+    driveForward(){
+      super.driveForward(); // call the Vehicles drive forward function
+      // code for driving forward on water
+    }
+  }
+
+  let car = new Car('8 cylinder engine', 'gasoline', '200 km/h');
+  car.driveForward();
+
+  let boat = new Boat('4 cylinder engine', 'diesel', '50 km/h');
+  boat.driveForward();
+
+            </code></pre>
+          </div>
+      </div>      
+    </h4>
+    </div>      
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#createClass">How to create a Class</a>
+                  </li>
+                  <li>
+                    <a href="#passingVars">Passing Variables</a>
+                  </li>
+                  <li>
+                    <a href="#this">this</a>
+                  </li>
+                  <li>
+                    <a href="#func">Functions</a>
+                  </li>
+                  <li>
+                    <a href="#subClass">Sub Class</a>
+                  </li>                
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

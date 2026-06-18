@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BRADEngine.js - Fundamentals</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BRADEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">BRADEngine.js:
+        </h1>
+        <h4 style="font-weight:normal;">(Basic Reusable Application Designer)Engine.js.  The BRADEngine works with Levels and BRADObjects
+          <br/>
+          <br/>
+          <div class="alert alert-info" role="alert">
+            <p><h4>Current repo note:</h4></p>
+            <p>The engine now lives under <strong>src/js</strong>, shared art/audio/font assets live under <strong>src/sharedMedia</strong>, and examples live under <strong>examples/</strong>. Run the repo with <strong>node serveLocal.js</strong> or <strong>serveLocal.bat</strong>, then open <strong>http://localhost:8000/</strong>.</p>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="lifecycle"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Level Life Cycle</h2>
+            <p class="card-text"> Levels come with important functions that do most of the work for you. </p>
+            <div class="alert alert-warning" role="alert">
+              <p><h4>Note:</h4></p>
+              <p> You must have a MainLevel </p>
+          </div>   
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  class MainLevel extends LevelInterface {
+    getKeyboardInput(event){} // talk to keyboard
+    getMouseInput(event){} // talk to mouse clicks
+    getMouseMoveInput(event){} // talk to mouse move
+
+    loadResources(){} // load images and sounds
+    updateLoading(delta, leftToLoad, total){} // loading screen
+    setup(){} // setup the level after loading resources
+    update(delta){} // update at the configured FPS; delta is seconds since the last update
+    draw(){} // draw to the screen at 0 fps
+  }
+            </code></pre>
+        </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="loading"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Loading Resources</h2>
+            <p class="card-text"> Load your images and sounds inside of loadResources.  When it is done setup will be called. </p>
+            <div class="alert alert-warning" role="alert">
+              <p><h4>Note:</h4></p>
+              <p> use <strong> this.findResources('home folder',['resource folders']); </strong> to add all the images/sounds you need for this level. Shared media can be loaded with paths such as <strong>src/sharedMedia/images/garage</strong>. </p>
+          </div>   
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  class MainLevel extends LevelInterface {
+    loadResources(){
+      this.findResources('physics',['src/sharedMedia/images/road','src/sharedMedia/images/garage']);
+    }
+    setup(){
+      // setup your level after all resources have loaded
+      this.images['name.png'] // access the loaded images
+    } 
+  }
+            </code></pre>
+
+            <div class="alert alert-success" role="alert">
+              <p> While the resources are loading, a loading screen will be presented for you.  But you can create your own loading screen using  </p>
+          </div> 
+
+          <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  updateLoading(delta, leftToLoad, total){
+    // write the code for the loading screen here
+  }          
+          </code></pre>
+        </div>
+      </div>      
+
+        <!-- Blog Post -->
+        <div id="drawing"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Drawing to the Level</h2>
+            <p class="card-text"> Here are the primitive functions for drawing on the level </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+
+  // draw primitives
+  const drawBox=(x,y,w,h,col,params)
+  const drawRoundBox = (x, y, width, height, col, params)
+  const drawCircle=(x,y,r,col,params)
+  const drawLine=(x1,y1,x2,y2,col,params)                            
+  const drawFill=(path,col, params)
+
+  // draw rotated primitives
+  const drawRotatedBox=(x,y,width,height,degrees,col,params)
+  const drawRotatedOffsetBox=(x,y,width,height,degrees,col, pivit,params)
+
+  // draw text
+  const drawText=(x,y,text,size,col,params)
+              
+  // draw image - the "image name" needs to be a string key in the level.images array
+  // x,y are center of the image and w, h are the radius
+  const drawImage=(imgString, x1, y1, w1, h1, degrees)
+  const drawImageFrom00=(imgString, x1, y1, w1, h1) // x,y are the top left corner and w, h are the real size
+  const drawSprite=(img, x1, y1, w1, h1, x2, y2, w2, h2)
+  const drawImageSprite=(imgString, x1, y1, w1, h1, x2, y2, w2, h2, degrees)
+
+  // draw rotated images
+  const drawRotatedImage=(image,x,y,width,height,degrees,params)
+  const drawRotatedSprite=(image,x1, y1, w1, h1, x,y,width,height,degrees,params)             
+  const drawRotatedFlippableImage=(image,x,y,width,height,degrees,params)
+
+  // 3D drawing 
+  const drawCircle3D=(x, y, z, r, col, params)
+  const drawImage3D=(imgString, x1, y1, z1, w1, h1, degrees)
+  const drawSprite3D=(imgString, x1, y1, w1, h1, x2, y2, z1, w2, h2, degrees)
+  const drawLine3D=(x1, y1, z1, x2, y2, z2,col, params)
+
+  // builds a new image
+  const createFlippedImage=(image, width, height)
+                
+            </code></pre>
+
+            <div class="alert alert-warning" role="alert">
+              <p><h4>Note:</h4></p>
+              <p> <strong>params</strong> are used to pass in canvas related parameters when drawing.  Example: you can add shadows to text. </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;"></code>
+  drawText(0,0,'Some words here',30,'black',{shadowOffsetX:3,shadowOffsetY:3,shadowColor:"rgba(0,0,0,0.3),context.shadowBlur:4"}); 
+              </code></pre>
+            </div>   
+
+            <p class="card-text"> <strong>draw()</strong><br/> method allows you to draw to the screen </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  draw(){
+    drawBox(100,200,50,50,'red');
+  }
+            </code></pre>
+            <p class="card-text"> <strong>update()</strong><br/> method allows you to draw to the screen at 60 frames per second. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  update(delta){
+    let x = this.position.x + (speed.x * delta);
+    let y = this.position.y + (speed.y * delta);
+    drawImage('car1.png', x, y, 128, 128);
+  }
+            </code></pre>
+            <div class="alert alert-warning" role="alert">
+              <p><h4>Note:</h4></p>
+              <p> <strong>delta</strong> is the time between frames. This is needed to keep animations running the same speed even when the frame rate is not stable  </p>
+          </div>   
+
+        </div>
+      </div>
+
+        <!-- Blog Post -->
+        <div id="input"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Keyboard and Mouse Events</h2>
+            <p class="card-text"> Find out when the player has typed on the keyboard or used the mouse</p>
+            <div class="alert alert-warning" role="alert">
+              <p><h4>Note:</h4></p>
+              <p> You must have a MainLevel </p>
+          </div>   
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  class MainLevel extends LevelInterface {
+    getKeyboardInput(event){
+      console.log(event);
+      // type: "down" or "up"
+      // key: "h"
+      // combined: = Alt and/or Ctrl and/or Shift 
+    } 
+    getMouseInput(event){
+      console.log(event);
+      //  type: "down" or "up"
+      //  position:
+      //    x: 640
+      //    y: 572.5
+    } 
+    getMouseMoveInput(event){
+      console.log(event);
+      //  type: "moving"
+      //  position:
+      //    x: 640
+      //    y: 572.5
+    } 
+  }
+            </code></pre>
+        </div>
+      </div>      
+
+  </h4>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#lifecycle">Level Life Cycle</a>
+                  </li>
+                  <li>
+                    <a href="#loading">Loading Resources</a>
+                  </li>
+                  <li>
+                    <a href="#drawing">Drawing to the Level</a>
+                  </li>
+                  <li>
+                    <a href="#input">Keyboard and Mouse Events</a>
+                  </li>               
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>Brad Engine</title>
+
+        <script> 
+            // const META={ NETWORK:{ IS_SERVER:true, STUN_SERVER:{host: '54.235.28.16',port: 9000,path: '/myapp'}},
+            //              FPS:60, PHYSICS_FPS:60 } 
+            const META={ NETWORK:{ IS_SERVER:true, STUN_SERVER:{debug:2}},
+                         SHOW_DEBUG:true, NETWORK_FPS:60, FPS:60, PHYSICS_FPS:60,
+                         CREATE_DIR:false,DISPLAY_SIZE:'fullHeight'}
+        </script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/peerjs@1.2.0/dist/peerjs.min.js"></script>
+                <script>
+            (function () {
+                var repoName = 'BradEngine_Public';
+                var href = window.location.href.replace(/\\/g, '/');
+                var marker = '/' + repoName + '/';
+                var markerIndex = href.toLowerCase().indexOf(marker.toLowerCase());
+                var root = markerIndex >= 0 ? href.slice(0, markerIndex + marker.length) : window.location.origin + '/';
+
+                window.bradAsset = function (path) {
+                    return new URL(path, root).href;
+                };
+
+                window.bradLoadScript = function (path) {
+                    document.write('<script src="' + window.bradAsset(path) + '"><\/script>');
+                };
+
+                window.bradLoadStyle = function (path) {
+                    document.write('<link rel="stylesheet" href="' + window.bradAsset(path) + '">');
+                };
+            }());
+        </script>
+<script>bradLoadScript('src/js/dirlist.js');</script>
+        <script>bradLoadScript('src/js/lib/box2dWeb-2.1.a.3.js');</script>
+        <script>bradLoadScript('src/js/pipeline3D.js');</script>
+        <script>bradLoadScript('src/js/BRADEngine.js');</script>
+        <script>bradLoadScript('src/js/network.js');</script>
+        <script>bradLoadScript('src/js/particleSystem.js');</script>
+        <script src='springRope.js'></script>
+
+        <script>bradLoadStyle('src/style.css');</script>
+    </head>
+    
+    <body>
+      <div id="overlayHelpDialogMobile" style="display: none;" onclick="helpOverlayOff()"><div id="helpTextMobile"></div></div>
+      <div id="overlayHelpDialog" style="display: none;" onclick="helpOverlayOff()"><div id="helpText"></div></div>
+      <div id="content" class="center" style="display: none;"><canvas id='canvas'></canvas></div>
+    </body>
+</html>

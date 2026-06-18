@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BRADEngine.js - Functions</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BRADEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">Functions: (Methods / Procedures)
+        </h1>
+        <h4 style="font-weight:normal;">Functions are a way to group code together.  Calling the function will run your grouped code.
+          <br/>
+          <br/>
+        <!-- Blog Post -->
+        <div id="createFunc"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+                <h2 class="card-title">How to create a function</h2>
+                <p class="card-text"> There are multiple ways to create a function. </p>
+                <div class="alert alert-warning" role="alert">
+                    <p><h4>Note:</h4></p>
+                    <p> All code must be be between the <strong>{ }</strong> Anything outside of those two brackets is <strong>NOT</strong> part of the function. </p>
+                </div>              
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    function healPlayer(){
+        // write all the code that would heal the player here
+    }
+
+    // whenever you want to heal the player just call the function
+    healPlayer();
+
+    // if you want to heal them twice just call it twice.
+    healPlayer();
+    healPlayer();
+              </code></pre>
+            </div>
+        </div>
+
+        <!-- Blog Post -->
+        <div id="passingVars"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Passing Variables (Parameters, Attributes)</h2>
+                <p class="card-text"> You can pass one or more variables into a function </p>
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    function healPlayer(bodyPart, amount){
+        // write all the code that would heal the player here
+
+        // bodyPart - will only heal that body part
+        console.log(bodyPart); // Leg
+
+        // amount - will only heal by that amount
+        console.log(amount); // 10
+    }
+
+    // just heal the leg 10%
+    healPlayer('Leg',10);
+              </code></pre>
+            </div>
+        </div>        
+          
+        <!-- Blog Post -->
+        <div id="return"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Return a result</h2>
+                <p class="card-text"> You can a variable back to whatever called this function </p>
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    function getPlayerName(){
+        return 'Brad';
+    }
+
+    let name = getPlayerName();
+    console.log(name); // Brad
+              </code></pre>
+              <p class="card-text"> Putting it all together with an add function. </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  function add(a, b){
+      return a + b;
+  }
+
+  let answer = add(10,10);
+  console.log(answer); // 20
+            </code></pre>              
+            </div>
+        </div>           
+
+        <!-- Blog Post -->
+        <div id="returnJSON"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Return JSON</h2>
+                <p class="card-text"> If you want to return more then 1 thing then create a Object and return that </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  function getWeather(city){
+      // write some code that gets the weather then return it
+      return {
+          rainToday:true,
+          sevenDayTemperature:[12,15,8,19,21,15,18,18]
+      }
+  }
+
+  let weather = getWeather('Toronto');
+  // Todays high will be 12
+  console.log('Todays high will be '+weather.sevenDayTemperature[0]);  
+            </code></pre>              
+            </div>
+        </div>         
+
+        <!-- Blog Post -->
+        <div id="scope"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">Scope</h2>
+                <p class="card-text"> Any variables created inside your function will not work outside your function </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  function getName(){
+      let name = 'Brad';
+  }
+
+  console.log(name);  // name is undefined
+            </code></pre>              
+
+            <p class="card-text"> The opposite is true though. Any variables created outside your function will work inside your function.  These are called <strong>global</strong> variables.  They are called that because they work everywhere. For this reason, global variables should be used as little possible.</p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let name = 'Brad';                
+    function getName(){
+        console.log(name);  // Brad        
+    }
+          </code></pre>
+          <p class="card-text"> <h4>Reusing variable names</h4></p>
+          <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let name = 'Brad';                
+  function getName(){
+      let name = 'Dana' // name is now Dana inside this function
+      console.log(name);  // Dana
+  }
+  console.log(name);  // Brad
+        </code></pre>          
+            </div>
+        </div>   
+
+        <!-- Blog Post -->
+        <div id="es6"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="card-title">ES6 Functions</h2>
+                <p class="card-text"> There is a new way to create a function. This is meant for less typing and works with <strong>scope</strong> slightly better.</p>
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    healPlayer=(bodyPart, amount)=>{
+        // write all the code that would heal the player here
+    }
+    healPlayer('Leg',10);
+              </code></pre>
+            </div>
+        </div>   
+
+
+      </h4>
+    </div>
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#createFunc">How to create a function</a>
+                  </li>
+                  <li>
+                    <a href="#passingVars">Passing Variables</a>
+                  </li>
+                  <li>
+                    <a href="#return">Return a result</a>
+                  </li>
+                  <li>
+                    <a href="#returnJSON">Return JSON</a>
+                  </li>
+                  <li>
+                    <a href="#scope">Scope</a>
+                  </li>
+                  <li>
+                    <a href="#es6">ES6 Functions</a>
+                  </li>                
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

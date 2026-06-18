@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BRADEngine.js - Loops</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BRADEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">Loops:
+        </h1>
+        <h4 style="font-weight:normal;">Loops allow the programmer to loop through a group of code, over and over and over again.  
+        <br/>
+        <br/>
+        <!-- Blog Post -->
+        <div id="createLoop"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">How to create a Loop</h2>
+              <p class="card-text"> Check is something is true  </p>               
+              <div class="alert alert-warning" role="alert">
+                <p><h4>Note:</h4></p>
+                <p> All code lives between the <strong>{ }</strong> or it's not part of the <strong>loop</strong> </p>
+              </div> 
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let i = 0;
+  // loops 10 times
+  while (i &lt; 10) {
+    console.log("i = " + i);
+    i++;
+  }
+              </code></pre>
+              <p class="card-text"> Use <strong>break</strong> to exit the loop early.  </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let i = 0;
+  while (i &lt; 10) {
+    console.log("i = " + i);
+    i++;
+    if(i === 5) // exits the loop when i = 5
+      break;
+  }              
+              </code></pre>  
+              <p class="card-text"> While loops can be written backwards if needed.  This guarantees that the loop runs at least 1 time.  </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let i = 0;
+  do{
+    console.log("i = " + i);
+    i++;
+  }
+  while (i &lt; 10);
+              </code></pre>  
+              <p class="card-text"> Example of a loop not running the first time  </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  // This loop never runs
+  let i = 20;
+  while (i &lt; 10) {
+    console.log("i = " + i);
+    i++;
+  }
+
+  // ====================
+
+  // This loop will still run the first time
+  let i = 20;
+  do{
+    console.log("i = " + i);
+    i++;
+  }
+  while (i &lt; 10);
+  
+              </code></pre>  
+            </div>
+        </div>  
+        
+        <!-- Blog Post -->
+        <div id="forLoops"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+              <h2 class="card-title">For Loops</h2>
+              <p class="card-text"> <strong>for</strong> loops are the most used loops as they give you lots of control </p>
+              <div class="alert alert-warning" role="alert">
+                <p><h4>Note:</h4></p>
+                <p> You set i to 0 as part of the loop <strong>let i = 0;</strong></br/>
+                <p> You check if i is finihed as part of the loop <strong>i &lt; 10;</strong></br/>
+                <p> You increase i (by 1 everytime it loops) as part of the loop <strong>i++</strong></br/>
+                </p>
+              </div>               
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  for(let i=0; i &lt; 10; i++){
+    console.log("i = " + i); // i will be from 0 to 9 
+  }
+              </code></pre>
+              <div class="alert alert-warning" role="alert">
+                <p><h4>Note:</h4></p>
+                 i only goes up to 9 and not 10.</br/>
+                 If you want i to go up to 10 then you need to put an <strong>=</strong>                
+                </p>
+              </div>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  for(let i=0; i &lt;= 10; i++){
+    console.log("i = " + i); // i will be from 0 to 10
+  }
+              </code></pre>              
+            </div>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="reverse"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+              <h2 class="card-title">Reverse For Loops</h2>
+              <p class="card-text"> Sometimes you want to count down backwards </p>
+              <div class="alert alert-warning" role="alert">
+                <p><h4>Note:</h4></p>
+                <p> You set i to 10 as part of the loop <strong>let i = 10;</strong></br/>
+                <p> You check if i is finihed as part of the loop <strong>i &gt; 0;</strong></br/>
+                <p> You decrease i (by 1 everytime it loops) as part of the loop <strong>i--</strong></br/>
+                </p>
+              </div>               
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  for(let i=10; i &gt;= 0; i--){
+    console.log("i = " + i); // i will be from 10 to 0
+  }
+              </code></pre>
+          </div>
+      </div>        
+
+        <!-- Blog Post -->
+        <div id="by2s"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+              <h2 class="card-title">For Loops (increase by 2's)</h2>
+              <p class="card-text"> Sometimes you want to increase the counter higher then plus one per loop </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  for(let i=0; i &lt;= 10; i += 2){
+    console.log("i = " + i); // i will be 0, 2, 4, 6, 8, 10
+  }            
+              </code></pre>
+          </div>
+      </div>        
+
+        <!-- Blog Post -->
+        <div id="advanced"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+              <h2 class="card-title">Advanced For Loop</h2>
+              <p class="card-text"> You can run multiple lines of code as the for loop using commas to separate them. </p>
+              <div class="alert alert-success" role="alert">
+                <p><h4>Explaination of the code:</h4></p>
+                <p> 
+                  This code will count up all the numbers in an array and display it to the console.
+                  <ul>
+                    <li>set i to the length of the array <strong> AND </strong> set r = 0 using <strong>,</strong></li>
+                    <li>Use a truthy condition of when (i === 0) to exit the loop</li>
+                    <li>Use <strong>||</strong> to run code that happens when the loop is finished</li>
+                    <li>Add all the numbers together in the array with r += arr[i]</li>
+                  </ul>
+                </p>
+              </div>                
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  function countArray(arr) {
+    for (let i=arr.length, count=0; i-- || console.log(count); count += arr[i]);
+  }
+  countArray([3,5,0,-2,7,8]); // 21
+              </code></pre>
+          </div>
+      </div>
+
+        </h4>
+  </div>  
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#createLoop">How to create a Loop</a>
+                  </li>
+                  <li>
+                    <a href="#forLoops">For Loops</a>
+                  </li>
+                  <li>
+                    <a href="#reverse">Reverse For Loops</a>
+                  </li>
+                  <li>
+                    <a href="#by2s">For Loops (increase by 2's)</a>
+                  </li>
+                  <li>
+                    <a href="#advanced">Advanced For Loop</a>
+                  </li>                
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+</script>>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BRADEngine.js - Fundamentals</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BRADEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+        <br/>
+        <div class="alert alert-info" role="alert">
+          <p><h4>Current repo note:</h4></p>
+          <p>Prefer <strong>findResources()</strong> for shared assets so examples work from a fresh clone and from GitHub Pages. Shared sprite sheets such as the butterfly live under <strong>src/sharedMedia/images/anim</strong>.</p>
+        </div>
+        <!-- Blog Post -->
+        <div id="do"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Drawable Objects</h2>
+              <p class="card-text"> Drawable Objects are s simple way to organize items in your level.</p>
+              <p class="card-text"> Life cycle of an Object </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  class myObject{
+    constructor{}
+    getMouseInput(event){}        
+    getMouseMoveInput(event){}
+    getKeyboardInput(event){}
+    draw(){}
+    gameLoop(delta){}
+  }
+              </code></pre>
+          </div>
+        </div> 
+  
+          <!-- Blog Post -->
+          <div id="level"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Using a Drawable Object in a Level</h2>
+              <p class="card-text"> Create and Object and add it to the level. </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    class Box{
+      constructor(x, y, width, height, color){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+      }
+      draw(){
+        drawBox(this.x, this.y, this.width, this.height, this.color);
+      }
+    }
+  
+    class MainLevel extends LevelInterface {
+      setup(){
+        this.addObject(`Box`,new Box(50, 50, 150, 50, 'green'));
+      }
+      draw(){
+        this.getObject(`Box`).draw();
+      }
+    }
+              </code></pre>
+          </div>
+        </div>      
+  
+          <!-- Blog Post -->
+          <div id="clickable"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Clickable Drawable Object</h2>
+              <p class="card-text"> Use <strong>subscribe</strong> to attach the object to the level's mouse listener </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    class Box{
+      constructor(x, y, width, height, color){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.userColor = color;
+        this.color = color;
+      }
+  
+      getMouseInput(event){
+        // change the box to red on mouse down
+        if(event.type === "down"){ 
+            this.color = 'red';
+            this.draw();
+        }  
+        // change the box to normal color on mouse up
+        if(event.type === "up"){
+          this.color = this.userColor;
+          this.draw();
+        }  
+      }    
+  
+      draw(){
+        drawBox(this.x, this.y, this.width, this.height, this.color);
+      }
+    }
+    
+    class MainLevel extends LevelInterface {
+      setup(){
+        this.addObject(`Box`,new Box(50, 50, 150, 50, 'green'));
+      }
+      draw(){
+        let button = this.getObject(`Box`).draw();
+        this.subscribe(EventTypes.MOUSE,button);
+      }
+    }
+              </code></pre>
+          </div>
+        </div>         
+  
+          <!-- Blog Post -->
+          <div id="BRADObjects"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">BRADObjects</h2>
+              <p class="card-text"> BRADOBjects are Drawable objects that do more of the work for you.  Including handling Sprites.</p>
+              <p class="card-text"> Life cycle of a BRADObject </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  class myObject extends BRADObject{
+    setupParams(){}
+    getMouseInput(event){}        
+    getMouseMoveInput(event){}
+    getKeyboardInput(event){}
+    update(delta){}
+    draw(){}
+  }
+              </code></pre>
+          </div>
+        </div>       
+  
+          <!-- Blog Post -->
+          <div id="sprites"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">Sprites with BRADObjects</h2>
+              <p class="card-text"> Below creates an animating butterfly that animates at 5fps. </p>
+              <div class="alert alert-warning" role="alert">
+                <p><h4>Note:</h4></p>
+                <p> BRADObjects play a sprites <strong>idle</strong> animation by default </p>
+            </div>            
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    class MainLevel extends LevelInterface {
+   
+      loadResources(){
+          this.findResources('physics',['src/sharedMedia/images/anim']);
+      }
+    
+      setup(){
+        let butterfly = this.addObject('Butterfly',new Ball(
+            {
+                canvas:this.canvas,
+                width:200, height:200,
+                createSprites:[{
+                    name:'main',
+                    fps:5,
+                    image: 'butterfly-a.png',
+                    animations: {idle : {startFrame: 0, numFrames:8}},
+                    cells: {rows: 1, cols: 8}
+                }]
+            }
+        ));
+      }
+  
+      update(delta){} // required if you want 60fps
+    }
+              </code></pre>
+          </div>
+        </div>  
+  
+    </h4>
+        </div>
+  
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+  
+          <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Contents</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="#do">Drawable Objects</a>
+                    </li>
+                    <li>
+                      <a href="#level">Using a Drawable Object in a Level</a>
+                    </li>
+                    <li>
+                      <a href="#clickable">Clickable Drawable Object</a>
+                    </li>
+                    <li>
+                      <a href="#BRADObjects">BRADObjects</a>
+                    </li>
+                    <li>
+                      <a href="#sprites">Sprites with BRADObjects</a>
+                    </li>              
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+      <!-- /.row -->
+  
+    </div>
+    <!-- /.container -->
+  
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+  
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  </body>
+  
+  </html>
+  

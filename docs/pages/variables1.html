@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BRADEngine.js - Variables</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BRADEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">Variables:
+        </h1>
+        <h4 style="font-weight:normal;">Variables are a way for your program to remember.  You can think of them as place holders.
+          <br/>
+          <br/>
+        <!-- Blog Post -->
+        <div id="createVar"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+              <h2 class="card-title">How to create a variable</h2>
+              <p class="card-text">  To store a value into a variable, you first must create a name for your variable.   </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    var myVariableName;  // undefined by default
+              </code></pre>
+              <p class="card-text"> Since it's after 2020, we now use <strong>let</strong> instead of <strong>var</strong>. (var is function scoped and let is block scoped) </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let myVariableName; // undefined by default
+              </code></pre>
+              <p class="card-text"> Pass the data that you want to start in the variable using the <strong>=</strong>. </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let myVariableName = 12;
+              </code></pre>
+              <div class="alert alert-warning" role="alert">
+                    <p><h4>Note:</h4></p>
+                    <p> Unlike most programming languages, Javascript variables are interchangeable. This means any variable can be a number or a string or true/false value etc... </p>
+              </div>              
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let myVariableName = 12; // now equals 12
+        myVariableName = "Brad"; // now equals Brad
+        myVariableName = true; // now equals true 
+               </code></pre>
+            </div>
+          </div>
+
+        <!-- Blog Post -->
+        <div id="numbers"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+          <div class="card-body">
+            <h2 class="card-title">Numbers</h2>
+            <p class="card-text"> Javascript has two kinds of numbers (float, int).  </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  var a = 42; // integer, int
+  var b = -42; // integer, int
+  var c = 0.5; // float
+  var d = -0.5; // float
+            </code></pre>
+          </div>
+        </div>
+
+        <!-- Blog Post -->
+        <div id="boolean"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+              <h2 class="card-title">Boolean</h2>
+              <p class="card-text"> Booleans are either true or false.  </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    var a = true;
+    var b = false;
+              </code></pre>
+            </div>
+        </div>        
+
+
+        <!-- Blog Post -->
+        <div id="string"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+              <h2 class="card-title">String</h2>
+              <p class="card-text"> A string is a group of characters (words).  But they must be inside quotations.  </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    var name1 = 'Brad';
+    var name2 = "Brad";
+              </code></pre>
+            </div>
+        </div>        
+
+        <!-- Blog Post -->
+        <div id="adding"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+              <h2 class="card-title">Adding variables together</h2>
+              <p class="card-text"> Numbers can use math operators (+ - * /) to add them together </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let a = 5;
+    let b = 2;
+    let c = a + b; // 7
+    let d = a - b; // -3
+    let e = a * b; // 10
+    let f = a / b; // 2.5
+            </code></pre>
+            <p class="card-text"> Strings can be added together (Concatenation) </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let firstName = 'Brad';
+    let lastName = 'Whitten';
+    let fullName = firstName + ' ' + lastName;
+          </code></pre>
+          <p class="card-text"> Short hand operators (++ -- += -= *= /=) </p>
+          <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 1;
+  a++; // a = 2;
+
+  let b = 2;
+  b --; // b = 1
+
+  let c = 1;
+  c+=5; // c = 6;
+
+  let d = 5;
+  d -= 4; // d = 1
+
+  let e = 5;
+  e *= 2; // e = 10
+
+  let f = 10;
+  f /= 2; // f = 5
+        </code></pre>          
+            </div>            
+        </div>           
+
+        <!-- Blog Post -->
+        <div id="arrays"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+                <h2 class="card-title">Arrays</h2>
+                <p class="card-text"> Arrays are groups of variables stored as one variable </p>
+
+                <div class="alert alert-warning" role="alert">
+                    <p><h4>Note:</h4></p>
+                    <p> Use the <strong>[ ]</strong> to group variables together and comma separate them.</p>                
+                </div>                    
+
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let numbers = [1,2,3,4];
+    let names = ['Brad', 'Dana', 'Adam', 'Brent'];
+
+    let moreNames = [];
+    moreNames[0]='Stacey';
+    moreNames[1]='Glen';
+    moreNames[2]='Steve';
+
+    let evenMoreNames = [];
+    evenMoreNames.push('Mike');
+    evenMoreNames.push('Lisa');
+    evenMoreNames.push('Mark');
+                </code></pre>
+
+                <p class="card-text"> Access the data stored in an array by index (<i>A number that points to the location of where your item is stored</i>). <strong>Remember:</strong> Indexes start at 0 </p>
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let names = ['Brad', 'Dana', 'Adam', 'Brent'];
+    console.log(names[2]); // prints Adam to the console
+              </code></pre>
+            </div>
+        </div>    
+
+        <!-- Blog Post -->
+        <div id="dictionary"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+                <h2 class="card-title">Dictionary (Map / Hashtable / Associative Array)</h2>
+                <p class="card-text"> A dictionary is an array that uses strings (keys) as the index instead of a number. </p>
+
+                <div class="alert alert-warning" role="alert">
+                    <p><h4>Note:</h4></p>
+                    <p> Use the <strong>{ }</strong> for dictionary arrays.  This is because dictionarys are really just normal objects.</p>                
+                </div>                 
+
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let numbers = {};
+    number['One'] = 1;
+    number['Two'] = 2;
+    number['Three'] = 3;
+
+    console.log(number['Two']); // 2
+                </code></pre>
+            </div>
+        </div>           
+
+        <!-- Blog Post -->
+        <div id="enums"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+                <h2 class="card-title">Enums</h2>
+                <p class="card-text"> Enums are best used to force the correct spelling for keys in a dictionary and later when using a <strong>switch</strong> statement.</p>
+
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    const NumberTypes = {
+        ONE: 'one',
+        TWO: 'two',
+        THREE: 'three'
+    }
+    
+    let numbers = {};
+    number[NumberTypes.ONE] = 1;
+    number[NumberTypes.TWO] = 2;
+    number[NumberTypes.THREE] = 3;
+
+    // gives compile error if you spell ONE wrong
+    console.log(numbers[NumberTypes.ONE]); 
+
+                </code></pre>
+            </div>
+        </div>   
+
+
+        <!-- Blog Post -->
+        <div id="objects"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+                <h2 class="card-title">Objects</h2>
+                <p class="card-text"> An object is a single variable that can hold many variables.  This is the same as and array but objects can also hold functions.  (More about that later) </p>           
+
+                <div class="alert alert-warning" role="alert">
+                    <p><h4>Note:</h4></p>
+                    <p> Use the <strong>{ }</strong> to create a blank objects. <strong>Notice:</strong> This is the same as a Dictionary Array because Dictionaries are objects </p>
+                </div> 
+
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let player = {};
+    player.positionX = 100;
+    player.positionY = 150;
+    player.speed = 10;
+                </code></pre>
+                <p class="card-text"> Objects can hold Objects inside them. </p>
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let player = {};
+    player.position = {};
+    player.position.x = 100;
+    player.position.y = 150;
+    player.speed = 10;
+                </code></pre>
+                <p class="card-text"> <strong>Remember:</strong> This is the same as... </p>
+                <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let player = {};
+    player['position'] = {};
+    player['position']['x'] = 100;
+    player['position']['y'] = 150;
+    player['speed'] = 10;
+                </code></pre>                  
+            </div>
+        </div>           
+
+
+       <!-- Blog Post -->
+       <div id="json"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+       <div class="card mb-4">
+        <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+        <div class="card-body">
+            <h2 class="card-title">JSON</h2>
+            <p class="card-text"> JSON is native to JavaScript and therefore lets you save any oject into a string as well as turn any string into an object.  This rocks for 2 reasons. 
+                <ul>
+                    <li>Can save the state of your game or program to a database</li>
+                    <li>Can create and pass objects on the fly</li>
+                  </ul>    
+            </p>
+
+            <div class="alert alert-warning" role="alert">
+                <p><h4>Note:</h4></p>
+                <p> Use the <strong>{ }</strong> to create a JSON objects. <br/>
+                Use the <strong>:</strong> instead of =. <br/>
+                Still use <strong> [ ] </strong> for arrays <br/>
+                Don't use <strong>;</strong> inside of the JSON.  Make sure you use <strong>commas</strong> though </p>
+            </div> 
+
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let player = {};
+    player.position = {};
+    player.position.x = 100;
+    player.position.y = 150;
+    player.speed = 10;
+    player.weapons['Gun','Knife'];
+
+    // written in JSON would be
+
+    let player = {
+        position{
+            x : 100,
+            y : 150
+        },
+        speed: 10,
+        weapons:['Gun','Knife']
+    };
+
+    // or more compact as
+    let player = {position{x:100,y:150},speed:10,weapons:['Gun','Knife']};
+            </code></pre>
+
+            <p class="card-text"> <h4>String to Object.</h4>  <strong>Notice:</strong> the contents are inside <strong>" "</strong>.  Therefore, javascript just thinks its a bunch of words in a string and not a real object. </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let string = "{position{x:100,y:150},speed:10,weapons:['Gun','Knife']}";
+    let player = JSON.parse(string);
+            </code></pre> 
+            
+            <p class="card-text"> <h4>Object to String.</h4>   </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+    let player = {};
+    player.position = {};
+    player.position.x = 100;
+    player.position.y = 150;
+    player.speed = 10;
+    player.weapons['Gun','Knife'];
+            
+    let string = JSON.stringify(player);
+            </code></pre>               
+        </div>
+    </div>             
+  </h4>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#createVar">How to create a variable</a>
+                  </li>
+                  <li>
+                    <a href="#numbers">Numbers</a>
+                  </li>
+                  <li>
+                    <a href="#boolean">Boolean</a>
+                  </li>
+                  <li>
+                    <a href="#string">String</a>
+                  </li>
+                  <li>
+                    <a href="#adding">Adding variables together</a>
+                  </li>
+                  <li>
+                    <a href="#arrays">Arrays</a>
+                  </li>
+                  <li>
+                    <a href="#dictionary">Dictionary</a>
+                  </li>
+                  <li>
+                    <a href="#enums">Enums</a>
+                  </li>
+                  <li>
+                    <a href="#objects">Objects</a>
+                  </li>
+                  <li>
+                    <a href="#json">JSON</a>
+                  </li>                 
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

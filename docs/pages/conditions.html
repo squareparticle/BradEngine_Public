@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BRADEngine.js - Conditions</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/blog-home.css" rel="stylesheet">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs2015.min.css">
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">BRADEngine.js</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/SquareParticle/BradEngine_Public">GitHub</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-9">
+
+        <h1 class="my-4">Conditions:
+        </h1>
+        <h4 style="font-weight:normal;">Conditions allow the programmer to check <strong>if</strong> something is <strong>true or false</strong>  
+        <br/>
+        <br/>
+        <!-- Blog Post -->
+        <div id="createCon"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+            <!-- <object data="http://www.youtube.com/embed/QZSGO0lJCE8" width="730" height="200"></object> -->
+            <div class="card-body">
+              <h2 class="card-title">How to create a Condition</h2>
+              <p class="card-text"> Check is something is true  </p>               
+              <div class="alert alert-warning" role="alert">
+                <p><h4>Note:</h4></p>
+                <p> All code lives between the <strong>{ }</strong> or it's not part of the <strong>if</strong> statement </p>
+              </div> 
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 2;
+  if(a === 2){
+    console.log('a = 2'); // displays a = 2
+  }
+              </code></pre>
+              <div class="alert alert-warning" role="alert">
+                <p> <h4>Notice there are 3 <strong>===</strong>  to check if its true.</h4><br/>
+                  if(a = 2)  <- this would make a = 2<br/>
+                  if(a == 2)  <- works but should fail if <strong> a </strong> is not an integer<br/>
+                  if(a === 2)  <- works and fails if is <strong> a </strong> is a string (a = '2')
+                </p>
+              </div> 
+              <p class="card-text"> Check is something not (<strong>!</strong>) true  </p>
+              <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 2;
+  if(a !== 2){
+    console.log('a = 2'); // will not reach here
+  }
+              </code></pre>                            
+            </div>
+        </div>   
+
+        <!-- Blog Post -->
+        <div id="if"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">if else</h2>
+            <p class="card-text"> When you want to add code to something that is both true and false, you can use an else statement </p>               
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 1;
+  if(a === 3){
+    console.log('a = 3'); 
+  }
+  else{
+    console.log('a is not 3');  // a is not 3
+  }
+            </code></pre>
+            <p class="card-text"> You can combine multiple if statements together </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 5;
+  if(a === 4 ){
+    console.log('a = 4'); 
+  }
+  else if(a === 3){
+    console.log('a = 3'); 
+  }
+  else if(a === 2){
+    console.log('a = 2'); 
+  }
+  else{
+    console.log('a is not 4 or 3 or 2');//a is not 4 or 3 or 2
+  }
+    
+            </code></pre>
+          </div>               
+    </div>            
+
+        <!-- Blog Post -->
+        <div id="combine"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>        
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Combining two conditions</h2>
+            <p class="card-text"> You can check multiple conditions for a single if statement </p>               
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 3;
+  if(a &gt; 2 && a &lt; 4 ){
+    console.log('a must be 3'); // a must be 3
+  }
+            </code></pre>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 4;
+  if(a &gt; 2 || a &lt; 4 ){
+    console.log('a is either 2 or 4'); // a is either 2 or 4
+  }
+            </code></pre>
+    </div>      
+  </div>  
+        <!-- Blog Post -->
+        <div id="truthy"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Truthy / Falsy</h2>
+            <p class="card-text"> Javascript can try and guess what you mean to be true or false.   </p>
+            <ul>
+              <li>0 = false vs any number = true</li>
+              <li>undefined variable = false vs a populated variable = true </li>
+              <li>[] = false vs a populated array = true</li>
+            </ul>            
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a;
+  if(!a){
+    console.log('a is not defined'); // a is not definded
+  }
+            </code></pre>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 4;
+  if(a){
+    console.log('a is defined'); // a is defined
+  }
+            </code></pre>
+          </div>               
+    </div>   
+
+        <!-- Blog Post -->
+        <div id="ternary"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Ternary operator </h2>
+            <p class="card-text"> It is possible to shorten an if statement.  If it is only one line long then you can remove the { }</p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 4;
+  if(a===5)
+    console.log('a = 5'); 
+  else
+    console.log('a is not 5'); // a is not 5
+            </code></pre>
+            <p class="card-text"> You can write an entire if else on one line using ? and :  </p>
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let a = 4;
+  // a is not 5
+  (a === 5) ? console.log('a = 5') : console.log('a is not 5');
+            </code></pre>
+          </div>               
+      </div>   
+
+        <!-- Blog Post -->
+        <div id="switch"><div style="padding-top: 40px; margin-top: -40px;"></div> </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">Switch</h2>
+            <p class="card-text"> Instead of a bunch of if else statements, you can use a Switch statement.</p>
+
+            <div class="alert alert-warning" role="alert">
+              <p><h4>Note:</h4></p>
+              <p> Use <strong>switch</strong> to select the case statement </p>
+              <p> Use <strong>case</strong> as the if statement </p>
+              <p> Use <strong>break</strong> to stop the case statement. (Or else it will run the next case statement) </p>
+              <p> If none of the case statements run then <strong>default</strong> will be selected </p>
+            </div> 
+
+            <pre><code class="javascript" style="font-size: 22px;padding:0;">
+  let name = 'Brad';
+  switch(name){
+    case 'Dana':
+      console.log('Your name is Dana');
+    break;
+    case 'Brad':
+      console.log('Your name is Brad');
+    break;
+    default:
+      console.log('Your name is '+name);
+  }
+            </code></pre>
+          </div>               
+      </div>         
+  </h4>
+  </div>  
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-3">
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Contents</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#createCon">How to create a Condition</a>
+                  </li>
+                  <li>
+                    <a href="#if">if else</a>
+                  </li>
+                  <li>
+                    <a href="#combine">Combining two conditions</a>
+                  </li>
+                  <li>
+                    <a href="#truthy">Truthy / Falsy</a>
+                  </li>
+                  <li>
+                    <a href="#ternary">Ternary operator</a>
+                  </li>                
+                  <li>
+                    <a href="#switch">Switch</a>
+                  </li>                
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; SquareParticle Corp 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
