@@ -28,10 +28,11 @@ http://localhost:8000/
 
 Most demos can also be opened directly by path under `examples/` or `learning/`.
 
-The repository root includes an AI-generated arcade-style demo launcher:
-[BradEngine Arcade](https://squareparticle.github.io/BradEngine_Public/). It is
-a quick visual index for browsing and opening all of the demo pages in this repo
-from one place.
+The original teaching docs are available at
+[BradEngine Docs](https://squareparticle.github.io/BradEngine_Public/docs/).
+These pages were written as teaching tools back in 2019. 
+The repository root includes an AI-generated arcade-style
+launcher for quickly browsing and opening the demo pages.
 
 ## Features
 
