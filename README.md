@@ -28,6 +28,10 @@ http://localhost:8000/
 
 Most demos can also be opened directly by path under `examples/` or `learning/`.
 
+The repository root includes an AI-generated arcade-style demo launcher at
+[index.html](index.html). It is a quick visual index for browsing and opening
+all of the demo pages in this repo from one place.
+
 ## Features
 
 - Custom canvas game loop with level lifecycle hooks such as `loadResources()`, `setup()`, and `update(delta)`.
