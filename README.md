@@ -52,45 +52,45 @@ Most demos can also be opened directly by path under `examples/` or `learning/`.
 
 ## Top 10 Projects To Try
 
-1. Voxel Engine  
-   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/3dGraphicsEngine/voxelEngine.html) | [Source](examples/3d/3dGraphicsEngine/voxelEngine.html)  
-   A blocky voxel world with generated chunks, localStorage-backed terrain, a player model, and a homemade 3D pipeline.
-
-2. Asteroids 3D  
+1. Asteroids 3D  
    [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/asteroids3D/index.html) | [Source](examples/3d/asteroids3D/index.html)  
    A larger 3D game experiment with meshes, HUD images, camera controls, and space-themed gameplay.
 
-3. Solar System  
-   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/solarsystem/index.html) | [Source](examples/3d/solarsystem/index.html)  
-   A 3D orbital demo with shared planet images and camera-driven rendering.
-
-4. Space Boss  
+2. Space Boss  
    [Run](https://squareparticle.github.io/BradEngine_Public/examples/eventDriven/spaceBoss/index.html) | [Source](examples/eventDriven/spaceBoss/index.html)  
    An event-driven action game with layered images, bullets, enemy parts, and boss-style interactions.
 
-5. Raycasting Demo  
-   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/raycasting/raycast.html) | [Source](examples/3d/raycasting/raycast.html)  
-   A ray-casting experiment inspired by early 3D rendering techniques.
+3. Voxel Engine  
+   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/3dGraphicsEngine/voxelEngine.html) | [Source](examples/3d/3dGraphicsEngine/voxelEngine.html)  
+   A blocky voxel world with generated chunks, localStorage-backed terrain, a player model, and a homemade 3D pipeline.
 
-6. Cloth Physics  
-   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/cloth/index.html) | [Source](examples/3d/cloth/index.html)  
-   A cloth simulation experiment using physics, mesh code, and 3D rendering.
+4. Texture Raycasting Demo  
+   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/raycasting/texturedRaycasting.html) | [Source](examples/3d/raycasting/texturedRaycasting.html)  
+   A ray-casting experiment with texture sampling for an early first-person 3D rendering effect.
 
-7. Starfield  
+5. Cloth Flag Physics  
+   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/cloth/flag.html) | [Source](examples/3d/cloth/flag.html)  
+   A cloth simulation experiment shaped into a flag-like mesh using physics and 3D rendering.
+
+6. Fire Finger  
+   [Run](https://squareparticle.github.io/BradEngine_Public/examples/drawing/cellularAutomaton/firefinger.html) | [Source](examples/drawing/cellularAutomaton/firefinger.html)  
+   An interactive cellular automata fire demo that responds to pointer-style input.
+
+7. Solar System  
+   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/solarsystem/index.html) | [Source](examples/3d/solarsystem/index.html)  
+   A 3D orbital demo with shared planet images and camera-driven rendering.
+
+8. Cellular Automaton Sand Sim  
+    [Run](https://squareparticle.github.io/BradEngine_Public/examples/drawing/cellularAutomaton/sandsim.html) | [Source](examples/drawing/cellularAutomaton/sandsim.html)  
+    A drawing/simulation experiment with image data and cellular-style state changes.
+
+9. Starfield  
    [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/starfield/index.html) | [Source](examples/3d/starfield/index.html)  
    A compact 3D movement and rendering experiment.
 
-8. ANN Pong  
-   [Run](https://squareparticle.github.io/BradEngine_Public/examples/machineLearning/ann/pong.html) | [Source](examples/machineLearning/ann/pong.html)  
-   A machine-learning experiment around pong behavior and neural-network-style control.
-
-9. 3D Wiremesh  
-   [Run](https://squareparticle.github.io/BradEngine_Public/examples/3d/wiremesh/index.html) | [Source](examples/3d/wiremesh/index.html)  
-   A model-loading and wireframe/mesh rendering demo using the homemade 3D pipeline.
-
-10. Cellular Automaton Sand Sim  
-    [Run](https://squareparticle.github.io/BradEngine_Public/examples/drawing/cellularAutomaton/sandsim.html) | [Source](examples/drawing/cellularAutomaton/sandsim.html)  
-    A drawing/simulation experiment with image data and cellular-style state changes.
+10. ANN XOR  
+    [Run](https://squareparticle.github.io/BradEngine_Public/examples/machineLearning/ann/index.html) | [Source](examples/machineLearning/ann/index.html)  
+    A neural-network visualization that trains against XOR-style inputs and displays the learned output field.
 
 ## License
 
